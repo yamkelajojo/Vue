@@ -1,3 +1,4 @@
+<!--Ended at Vue.js Beginners #3 10:45-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/vue@3.0.2"></script>
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
     <h1>Hello, Vue</h1>
@@ -24,6 +27,13 @@
         <div v-show="showbooks">
             <h3>Currently showing books</h3>
         </div>
+
+        <br>
+        <!--Mouse Events-->
+        <div class="box" @mouseover="handleEvent($event, 5)">mouse (enter)</div>
+        <div class="box" @mouseleave="handleEvent">mouse leave</div>
+        <div class="box" @dblclick="handleEvent">double click</div>
+        <div class="box" @mousemove="handleMousemove">position: ({{x}},{{y}})</div>
     </div>
 
     <script src="app.js"></script>
