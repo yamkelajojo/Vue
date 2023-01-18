@@ -1,0 +1,41 @@
+<!--Ended at Vue.js Beginners #3 10:45-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <h1>Hello, Vue</h1>
+
+    <div id="app">    
+        
+        <!-- Data/Attribute Binding -->
+        <a  v-bind:href="url">Best website ever!</a>
+        <!-- if v-bind akekho, url wont connect to one in.js and will just be whatever is in type in href-->
+        <!-- can even just add a colon (:) instead of v-bind, it will bind whats in js-->
+
+        <div v-if="showBooks">
+            <ul>
+                <li v-for="book in books" :class="">
+                    <img :src="book.img" :alt="book.title">
+                    <h3>{{book.title}}</h3>
+                    <h5>{{book.author}}</h5>
+                </li>
+            </ul>          
+        </div>
+
+        <button @click="toggleShowBooks">
+            <span v-if="showBooks">Hide Books</span>
+            <span v-else>Show Books</span>
+        </button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
