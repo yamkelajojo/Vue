@@ -22,7 +22,7 @@
 
         <div v-if="showBooks">
             <ul>
-                <li v-for="book in books" :class="">
+                <li v-for="book in filteredBooks" :class="{fav: book.isFav}" @click="toggleFav(book)"> <!--(class) if true, izobakhona, if false ayizubakho.  @Click, use book as parameter cause its the one that stands for each book in books-->
                     <img :src="book.img" :alt="book.title">
                     <h3>{{book.title}}</h3>
                     <h5>{{book.author}}</h5>
