@@ -1,6 +1,6 @@
 <template>
     <div class="backdrop">
-        <div class="modal" :class="{sale:theme === 'sale'}">
+        <div class="modal" :class="{sale:theme === 'sale'}"> <!--is equal to a boolean, if its true izovela, if its not true ayizuvela-->
             <h1>{{ header }}</h1>
             <p>{{ text }}</p>
         </div>
@@ -11,7 +11,7 @@
 <script>
 
 export default{
-    props: ['header', 'text']
+    props: ['header', 'text', 'theme']
 }
 
 </script>
@@ -44,4 +44,14 @@ h1 {
 .modal p{
     font-style: normal;
 }
+
+.modal.sale{
+    background: crimson;
+    color: white;
+}
+
+.modal.sale h1{
+    color: white;
+}
+
 </style>
