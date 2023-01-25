@@ -1,5 +1,5 @@
 <template>
-    <div class="backdrop">
+    <div class="backdrop" @click="closeModal">
         <div class="modal" :class="{sale:theme === 'sale'}"> <!--is equal to a boolean, if its true izovela, if its not true ayizuvela-->
             <h1>{{ header }}</h1>
             <p>{{ text }}</p>
@@ -11,7 +11,17 @@
 <script>
 
 export default{
-    props: ['header', 'text', 'theme']
+    //"registering it"
+    props: ['header', 'text', 'theme'],
+
+    methods: {
+        closeModal(){
+            //creating custom event to be used in App.Vue js
+            //like binding in a way, makes the component in App.vue listen to the event
+            // makes it to be used like u@click, but it will be called @close in app, then calls function
+            this.$emit('close')
+        }
+    }
 }
 
 </script>
@@ -28,6 +38,7 @@ export default{
 
 .backdrop {
     top: 0;
+    left:0;
     position: fixed;
     background: rgba(0, 0, 0, 0.5);
     width: 100%;
