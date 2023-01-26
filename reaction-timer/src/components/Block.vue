@@ -1,5 +1,5 @@
 <template>
-  <div class="block" v-if="showBlock">
+  <div class="block" v-if="showBlock" @click="stopTimer">
     click me
   </div>
 </template>
@@ -10,7 +10,9 @@ export default {
 
     data(){
         return{
-            showBlock: false
+            showBlock: false,
+            timer: null,
+            reactionTime: 0,
         }
     },
 
@@ -19,18 +21,24 @@ export default {
         console.log("component mounted")
         setTimeout(()=> {
             this.showBlock = true
+            this.startTimer()
             console.log(this.delay)
         }, this.delay) //this second delay is the ixesha eliqale lihambe before it fires the function in setTimeout
     },
 
-    //lifecycle hook. this function fires when any data inside our component has been updated.
-    updated(){
-        console.log("component update")
-        console.log(this.showBlock)
-    },
+    methods:{
+        startTimer(){
+            this.timer = setInterval(() => {
+                this.reactionTime += 10
+            },10) // that 10 means that the function will run every 10ms
+        },
 
-    unmounted(){
-        console.log("component unmounted")
+        stopTimer(){
+            clearInterval(this.timer) //stop the increase of timer
+            console.log(this.reactionTime+"ms")
+            this.$emit('end', this.reactionTime)
+        }
+
     }
 }
 

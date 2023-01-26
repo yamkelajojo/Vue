@@ -1,7 +1,8 @@
 <template>
   <h1>Dojo Reaction Timer</h1>
   <button @click="start" :disabled="isPlaying" >play</button>
-  <Block  v-if="isPlaying" :delay="delay"/>
+  <Results v-if="showResults" :score="this.score"/>
+  <Block  v-if="isPlaying" :delay="delay" @end="endGame"/> <!--parameter from emit wil automatically be generated from $emit, and can pass it when defining function-->
 </template>
 
 <script>
@@ -16,7 +17,9 @@ export default {
   data(){
     return{
       isPlaying: false,
-      delay: null
+      delay: null,
+      score: null,
+      showResults: false
     }
   },
 
@@ -24,6 +27,13 @@ export default {
     start(){
       this.delay = 2000 + Math.random() * 5000
       this.isPlaying = true
+      this.showResults= false
+    },
+
+    endGame(reactionTime){
+      this.score = reactionTime
+      this.isPlaying = false
+      this.showResults = true
     }
   }
 }
@@ -38,5 +48,22 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+button{
+  background: #0faf87;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+button[disabled]{
+  opacity:0.2;
+  cursor: not-allowed;
 }
 </style>
