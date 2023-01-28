@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="handleSubmit"> <!-- ".prevent" prevents default HTML page refresh-->
     <label>Email</label>
-    <input type="text" v-model="email">
+    <input type="email" v-model="email">
 
     <label>Password</label>
     <input type="password" required v-model="password">
