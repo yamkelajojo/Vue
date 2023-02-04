@@ -1,0 +1,32 @@
+<template>
+  <div class="home">
+    <p>Home</p>
+    <p ref="p">My name is {{ name }} and my age is {{ age }}</p>
+    <button @click="handleClick">click me</button>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import {ref} from 'vue'
+
+export default {
+  name: 'Home ',
+
+  setup(){
+
+    const p = ref(null) // assigned it a vule of null
+    let name = 'mario'
+    let age = 30
+
+    const handleClick = () => {
+      console.log(p, p.value)
+      p.value.classList.add('test')
+      p.value.textContent = 'hello ninjas'
+    }
+
+    return{ name, age, handleClick, p} //must return and must return them as an object if you wanna use them in template
+
+  }
+}
+</script>
