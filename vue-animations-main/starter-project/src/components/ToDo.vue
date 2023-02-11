@@ -1,5 +1,5 @@
 <template>
-  <div class="toDo">
+    <div class="toDo">
     <input type="text" @keyup.enter="enterToDo" v-model="enteredValue" @click="zama" placeholder="Add a new todo.." id="toDoInp" class="cardLook">
     <div v-if="toDoList.length>0">
         <div v-for="(todo, index) in toDoList" :key="todo.id">
@@ -9,15 +9,18 @@
     <div v-else>
         <h3>Nothing to do...</h3>
     </div>
-  </div>
+    </div>
+    <ToDoPopUp :to_do_pop_up="to_do_pop_up"/>
 </template>
 
 <script>
+import ToDoPopUp from '@/components/ToDoPopUp.vue';
 import { ref } from '@vue/reactivity'
 import { watchEffect } from '@vue/runtime-core'
 
 export default {
     name: 'ToDo',
+    components: {ToDoPopUp},
     setup(){
         const toDoList = ref(
             [
@@ -26,17 +29,24 @@ export default {
             ]
         )
 
+        const to_do_pop_up = ref(false)
+
         const enteredValue = ref('')
 
-        // watchEffect(() =>{
-        //     toDoList.value.length > 0
-        // })
+        watchEffect(() => {
+            to_do_pop_up.value
+        })
 
         const enterToDo = () => {
-            toDoList.value.push({
-                title: enteredValue.value,
-                id: Date.now()
-            })
+            if(enteredValue.value !== ""){
+                toDoList.value.push({
+                    title: enteredValue.value,
+                    id: Date.now()
+                })                
+            }
+            else{
+                to_do_pop_up.value = !to_do_pop_up.value
+            }
         }
 
         const removeToDo = (index) => {
@@ -45,7 +55,7 @@ export default {
 
         
 
-        return {toDoList, enterToDo, enteredValue, removeToDo}
+        return {toDoList, enterToDo, enteredValue, removeToDo , to_do_pop_up}
     },
 }
 </script>
@@ -76,5 +86,3 @@ export default {
     cursor: pointer;
 }
 </style>
-
-<!--bru i just bought groceries today of which i didnt even think are gonna make it, if i did have i was gonna pull through but i dont even have that R100 in my account-->
