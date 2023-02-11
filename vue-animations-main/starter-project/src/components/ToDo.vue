@@ -2,8 +2,8 @@
   <div class="toDo">
     <input type="text" @keyup.enter="enterToDo" v-model="enteredValue" @click="zama" placeholder="Add a new todo.." id="toDoInp" class="cardLook">
     <div v-if="toDoList.length>0">
-        <div v-for="todo in toDoList" :key="todo.id">
-            <div class="cardLook toDoItem">{{ todo.title }}</div>
+        <div v-for="(todo, index) in toDoList" :key="todo.id">
+            <div class="cardLook toDoItem" @click="removeToDo(index)">{{ todo.title }}</div>
         </div>
     </div>
     <div v-else>
@@ -28,21 +28,24 @@ export default {
 
         const enteredValue = ref('')
 
-        const newToDo = ref('')
-
-        watchEffect(() =>{
-            toDoList.value.length
-        })
+        // watchEffect(() =>{
+        //     toDoList.value.length > 0
+        // })
 
         const enterToDo = () => {
-            newToDo.value = {title : enteredValue.value,
-            id: toDoList.value.at(-1).id+1}
-            toDoList.value.push(newToDo.value)
+            toDoList.value.push({
+                title: enteredValue.value,
+                id: Date.now()
+            })
+        }
+
+        const removeToDo = (index) => {
+            toDoList.value.splice(index, 1)
         }
 
         
 
-        return {toDoList, enterToDo, enteredValue}
+        return {toDoList, enterToDo, enteredValue, removeToDo}
     },
 }
 </script>
@@ -67,6 +70,10 @@ export default {
 .toDo{
     max-width: 400px;
     font-weight: bolder; 
+}
+
+:hover .toDoItem{
+    cursor: pointer;
 }
 </style>
 
