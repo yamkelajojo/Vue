@@ -1,7 +1,12 @@
 <template>
-  <h1>Contact</h1>
-  <div class="contactDiv">
-    <div class="contact" v-for="contact in contacts" :key="contact.id"><h4>{{ contact.title }}</h4></div>
+  <div class="contact">
+    <h1>Contact</h1>
+    <ul class="contact">
+      <li class="contact" v-for="icon in icons" :key="icon.name" >
+        <span class="material-icons">{{ icon.name }}</span>
+        <div>{{icon.text}}</div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -15,38 +20,36 @@ import { ref } from 'vue';
 export default {
   // components: {Contacts}
   setup() {
-    const contacts = ref([
-      { title: "Email", id: 1 },
-      { title: "Phone", id: 2 },
-      { title: "Post", id: 3 },
-      { title: "Contact Signal", id: 4 }
+    const icons = ref([
+      {name:'alternate_email', text:"by email" },
+      { name: 'local_phone', text: "by phone" },
+      { name: "local_post_office", text: "by post" },
+      { name: "local_fire-department", text: "by smoke signal" }
     ])
 
-    return { contacts }
+    return { icons }
   }
 }
 </script>
 
 <style>
-.contactDiv {
-  width: 400px;
+.contact ul {
+  padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  
-  place-items: center;
-  text-align: center;
+  grid-gap: 20px;
+  max-width: 400px;
+  margin: 60px auto;
   /* background-color: rgb(193, 213, 203); */
 }
 
-.contact{
-  background-color: white;
-  border-radius: 6px;
-  min-width: 170px;
-  min-height: 120px;
-  margin: 12px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: rgba(70, 70, 70, 0.24) 0px 2px 7px;
+.contact li{
+  list-style-type: none ;
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+  cursor: pointer;
+  line-height: 1.5em;
 }
 </style>
