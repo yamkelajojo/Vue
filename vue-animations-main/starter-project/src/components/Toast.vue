@@ -17,6 +17,8 @@ export default {
     position: fixed;
     width: 100%;
     top: 20px;
+    /* left: 50vw; */
+    /* right: 50%; */
 }
 
 .toast{
