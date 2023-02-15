@@ -1,12 +1,12 @@
 <template>
   <div class="contact">
     <h1>Contact</h1>
-    <ul class="contact">
+    <transition-group class="contact" tag="">
       <li class="contact" v-for="icon in icons" :key="icon.name" >
         <span class="material-icons">{{ icon.name }}</span>
         <div>{{icon.text}}</div>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
