@@ -1,10 +1,14 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link :to="{name: 'About'}">About</router-link> |
-    <router-link :to="{name : 'Contact'}">Contact</router-link>
+    <router-link :to="{ name: 'About' }">About</router-link> |
+    <router-link :to="{ name: 'Contact' }">Contact</router-link>
   </nav>
-  <router-view/>
+  <router-view v-slot="{ Component }">
+    <transition name="route" mode="out-in">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
 </template>
 
 <style>
@@ -19,7 +23,7 @@
   align-items: center;
 }
 
-body{
+body {
   margin: 0;
   height: 100vh;
   background: #f2f2f2;
@@ -36,5 +40,24 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+/*Route transitions*/
+.route-enter-from {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.route-enter-active {
+  transition: all 0.3 ease-out;
+}
+
+.route-leave-to {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.route-leave-active {
+  transition: all 0.3s ease;
 }
 </style>
