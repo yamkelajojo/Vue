@@ -46,8 +46,7 @@ export default {
         opacity: 1,
         y: 0,
         duration: 0.8,
-        onComplete: done,
-        delay: el.dataset.index * 0.2,
+        onComplete: done, //lo done is for transition so that uAfter uzongena after iaNIMATION KA ENTER IS COMPLETE, CAUSE IF YOU DONT , IT C.LOGS before animation is complete
       });
     };
     return { icons, beforeEnter, enter };
